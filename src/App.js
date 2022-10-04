@@ -6,7 +6,7 @@ import Hint from './components/Hint'
 
 function App() {
 
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
 
 
   const players = {
@@ -30,7 +30,7 @@ function App() {
       <div>
         <Guess players={players} />
         <Keyboard />
-        {gameOver ? <div>You lost</div> : <Hint players={players} setGameOver={setGameOver} gameOver={gameOver} />}
+        {gameOver ? <Hint players={players} setGameOver={setGameOver} gameOver={gameOver} /> : <div>You lost</div>}
 
       </div>
     </div>
