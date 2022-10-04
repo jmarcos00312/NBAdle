@@ -5,9 +5,8 @@ import Guess from './components/guess'
 import Hint from './components/Hint'
 
 function App() {
-  const [randomedPlayerNum, setRandomedPlayerNum] = useState(237)
-  const [randomedPlayer, setRandomedPlayer] = useState(null)
 
+  const [gameOver, setGameOver] = useState(false)
 
 
   const players = {
@@ -31,7 +30,8 @@ function App() {
       <div>
         <Guess players={players} />
         <Keyboard />
-        <Hint />
+        {gameOver ? <div>You lost</div> : <Hint players={players} setGameOver={setGameOver} gameOver={gameOver} />}
+
       </div>
     </div>
   );
