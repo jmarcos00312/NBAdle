@@ -1,3 +1,6 @@
+
+
+
 .App {
   text-align: center;
   background-color: #282c34;
@@ -40,6 +43,25 @@ justify-content: center;
 .eachLetters {
   padding: 3px;
 }
+#userInputLetters{
+    background-color: #282c34;
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin: 2em auto;
+    border: 1px solid white;
+    padding: 0;
+    width: 50ch;
+    height: 5ch;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  #eachWrongGuesses{
+    display: flex;
+    flex-direction: column;
+  }
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
