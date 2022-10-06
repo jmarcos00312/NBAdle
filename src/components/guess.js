@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Hint from './Hint'
-
+import PlayerLost from './PlayerLost'
 
 
 
@@ -29,7 +29,7 @@ function Guess({ players, setGameStatus, gameStatus }) {
     else {
       setUserGuess([...userGuess, inputValue])
       setGuessCounter(guessCounter + 1)
-      if (guessCounter > 5) {
+      if (guessCounter === 5) {
         setGameStatus(gameStatus.lost = true)
         console.log("lost")
       }
@@ -58,13 +58,14 @@ function Guess({ players, setGameStatus, gameStatus }) {
     <div>
       <img src={players.img_url} id="img_url" alt="Profile pic" />
       <div className="wrongLettersDiv">
+        <h1>{guessCounter}</h1>
         <Hint players={players} setGameStatus={setGameStatus} gameStatus={gameStatus} guessCounter={guessCounter} />
         <p id="eachWrongGuesses">{userGuess.map(e => {
           return <p>{e}</p>
         })}</p>
       </div>
       <h1 className="toBlank">{gameStart}</h1>
-      {!gameStatus.lost &&
+      {gameStatus.lost === false ?
         <form onSubmit={hadleSubmit}>
           <input
             id="userInputLetters"
@@ -76,6 +77,7 @@ function Guess({ players, setGameStatus, gameStatus }) {
             name="submit"
           />
         </form>
+        : <PlayerLost />
       }
       guess
     </div>

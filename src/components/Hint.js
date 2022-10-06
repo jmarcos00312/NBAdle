@@ -21,7 +21,6 @@ function Hint({ players, guessCounter }) {
         <div>
             {guessCounter !== 6 && (
                 <div>
-                    <h1>{guessCounter}</h1>
                     <div>
                         {guessCounter === 1 && oneHint}
                     </div>
