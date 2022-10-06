@@ -1,17 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-function Hint({ players, setGameOver, gameOver }) {
-    const [hintCounter, setHintCounter] = useState(0)
-
-    const userLost = () => {
-        setHintCounter(hintCounter + 1)
-        if (hintCounter === 5) {
-            setGameOver(!gameOver)
-        }
-    }
-    console.log(gameOver)
+function Hint({ players, guessCounter }) {
 
     let oneHint = <div>
+        <h2>Hint:</h2>
         <h3>height: {players.height}</h3>
         <h3>weight: {players.weight}</h3>
     </div>
@@ -27,18 +19,24 @@ function Hint({ players, setGameOver, gameOver }) {
 
     return (
         <div>
-            {hintCounter !== 6 && (
+            {guessCounter !== 6 && (
                 <div>
-                    {/* <!-- Rod --> */}
-                    {hintCounter <= 4 && <button onClick={userLost}>Hint</button>}
-                    
-                    <h1>{hintCounter}</h1>
-                    {hintCounter === 1 && oneHint}
-                    {hintCounter === 2 && twoHint}
-                    {hintCounter === 3 && threeHint}
-                    {hintCounter === 4 && fourHint}
-                    {hintCounter === 5 && fiveHint}
-
+                    <h1>{guessCounter}</h1>
+                    <div>
+                        {guessCounter === 1 && oneHint}
+                    </div>
+                    <div>
+                        {guessCounter === 2 && twoHint}
+                    </div>
+                    <div>
+                        {guessCounter === 3 && threeHint}
+                    </div>
+                    <div>
+                        {guessCounter === 4 && fourHint}
+                    </div>
+                    <div>
+                        {guessCounter >= 5 && fiveHint}
+                    </div>
                 </div>
             )}
         </div>

@@ -6,7 +6,12 @@ import Hint from './components/Hint'
 
 function App() {
 
-  const [gameOver, setGameOver] = useState(true)
+  const [gameStatus, setGameStatus] = useState({
+    ingame: false,
+    lost: false,
+    win: false,
+    wantHint: false
+  })
 
 
   const players = {
@@ -28,9 +33,8 @@ function App() {
         <h1>NBAdle</h1>
       </header>
       <div>
-        <Guess players={players} />
+        <Guess players={players} setGameStatus={setGameStatus} gameStatus={gameStatus} />
         <Keyboard />
-        {gameOver ? <Hint players={players} setGameOver={setGameOver} gameOver={gameOver} /> : <div>You lost</div>}
 
       </div>
     </div>

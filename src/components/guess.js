@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
+import Hint from './Hint'
 
 
 
 
-
-function Guess({ players }) {
+function Guess({ players, setGameStatus, gameStatus }) {
   const [wrongLetters, setWrongLetters] = useState([])
 
   const [correctLetters, setCorrectLetters] = useState([])
   const [inputValue, setInputValue] = useState("")
-  const [guessCounter, setGuessCounter] = useState(1)
+  const [guessCounter, setGuessCounter] = useState(0)
   const [userGuess, setUserGuess] = useState([])
   // const userGuess = []
 
@@ -28,6 +28,11 @@ function Guess({ players }) {
     }
     else {
       setUserGuess([...userGuess, inputValue])
+      setGuessCounter(guessCounter + 1)
+      if (guessCounter > 5) {
+        setGameStatus(gameStatus.lost = true)
+        console.log("lost")
+      }
     }
     setInputValue("")
   }
@@ -53,25 +58,25 @@ function Guess({ players }) {
     <div>
       <img src={players.img_url} id="img_url" alt="Profile pic" />
       <div className="wrongLettersDiv">
-
+        <Hint players={players} setGameStatus={setGameStatus} gameStatus={gameStatus} guessCounter={guessCounter} />
         <p id="eachWrongGuesses">{userGuess.map(e => {
           return <p>{e}</p>
         })}</p>
       </div>
       <h1 className="toBlank">{gameStart}</h1>
-      <form onSubmit={hadleSubmit}>
-        <input
-          id="userInputLetters"
-          type="text"
-          // value={inputValue}
-          onChange={(e) => handleChange(e)}
-        // onKeyPress={e => handleInputValue(e)}
-        />
-        <input
-          type="submit"
-          name="submit"
-        />
-      </form>
+      {!gameStatus.lost &&
+        <form onSubmit={hadleSubmit}>
+          <input
+            id="userInputLetters"
+            type="text"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="submit"
+            name="submit"
+          />
+        </form>
+      }
       guess
     </div>
   )
